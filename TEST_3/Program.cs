@@ -110,24 +110,21 @@ namespace EvaluationTest_3Project
 
         static void RepetationOfNumbers3()
         {
-            int num1 = 0;
-            List<int> list = new List<int>();
-            while (num1 >= 0)
+           List<int> mynum = new List<int>();
+            Console.WriteLine("Enter the numbers");
+            while (true)
             {
-                Console.WriteLine("Please enter the numbers:");
-                num1 = Int32.Parse(Console.ReadLine());
-                list.Add(num1);
+                int i = Convert.ToInt32(Console.ReadLine());
+                if (i < 0)
+                    break;
+                else
+                    mynum.Add(i);
             }
-            Console.WriteLine("The Repeating numbers are");
-            for (int i = 0; i < list.Count; i++)
+            IEnumerable<int> repeats = mynum.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key);
+            Console.WriteLine("Repeated Numbers are:");
+            foreach (var item in repeats)
             {
-                for (int j = 1; j < list.Count; j++)
-                {
-                    if (list[i] == list[j])
-                    {
-                        Console.WriteLine(list[i]);
-                    }
-                }
+                Console.WriteLine(item);
             }
         }
 
